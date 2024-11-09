@@ -259,4 +259,111 @@ If the turtle does not move as expected, check the terminal output for any error
 - ROS is sourced correctly.
 - The required dependencies are installed.
 
+Here is the continuation of the **README.md** file with the steps for creating the Python script and running it to move the turtle in a rectangular path:
+
+---
+
+## Step 12: Create a Python Script for Moving the Turtle in a Rectangle
+
+1. Navigate to the **scripts** directory of your ROS package:
+   ```bash
+   cd ~/catkin_ws/src/ros_session/scripts
+   ```
+
+2. Create a new Python script named `move_rectangle.py`:
+   ```bash
+   touch move_rectangle.py
+   ```
+
+3. Open the script in a text editor (e.g., `nano` or `vim`):
+   ```bash
+   nano move_rectangle.py
+   ```
+
+4. Add the following code to the `move_rectangle.py` script:
+
+```python
+#!/usr/bin/env python
+
+import rospy
+from geometry_msgs.msg import Twist
+from time import sleep
+
+def move_rectangle():
+    rospy.init_node('move_rectangle', anonymous=True)
+    pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=10)
+    rate = rospy.Rate(1)
+
+    move_cmd = Twist()
+    linear_speed = 2.5
+    angular_speed = 1.57
+
+    for _ in range(2):
+        move_cmd.linear.x = linear_speed
+        move_cmd.angular.z = 0.0
+        pub.publish(move_cmd)
+        sleep(2)
+
+        move_cmd.linear.x = 0.0
+        move_cmd.angular.z = 1.57
+        pub.publish(move_cmd)
+        sleep(1)
+
+        move_cmd.linear.x = linear_speed
+        move_cmd.angular.z = 0.0
+        pub.publish(move_cmd)
+        sleep(2)
+
+        move_cmd.linear.x = 0.0
+        move_cmd.angular.z = 1.57
+        pub.publish(move_cmd)
+        sleep(2)
+
+        move_cmd.linear.x = linear_speed + 3
+        move_cmd.angular.z = 0.0
+        pub.publish(move_cmd)
+        sleep(2)
+
+    move_cmd.linear.x = 0.0
+    move_cmd.angular.z = 0.0
+    pub.publish(move_cmd)
+    rospy.loginfo("Finished moving in a rectangle")
+
+if __name__ == '__main__':
+    try:
+        move_rectangle()
+    except rospy.ROSInterruptException:
+        pass
+
+```
+
+This script defines a function `move_rectangle()` that moves the turtle in a rectangular path by controlling the turtle’s linear and angular speeds.
+
+## Step 13: Give the Script Execute Permissions
+
+Once the script is saved, you need to give it execute permissions to make it runnable. Run the following command:
+
+```bash
+chmod +x move_rectangle.py
+```
+
+## Step 14: Run the Script
+ In the terminal where your script is located, run the script to make the turtle move in a rectangular path:
+
+   ```bash
+   ~/catkin_ws/src/ros_session/scripts# rosrun ros_session move_rectangle.py 
+
+   ```
+![image](https://github.com/user-attachments/assets/d2d6313a-2ce5-405a-bb98-bd0f04d6945a)
+
+   The turtle will now start moving in a rectangular pattern. It will move forward along the long side of the rectangle, turn 90 degrees, and repeat the process for the short side. The turtle will complete the rectangular path and stop.
+
+## Step 15: Observe the Output
+
+You should see the turtle in the **Turtlesim** window moving along a rectangular path. If you don't see the turtle, ensure that display forwarding (X11) is set up correctly, and check that `roscore` is running.
+
+## Conclusion
+
+By following these steps, you've successfully created and run a ROS Python script to control the turtle’s movement in a rectangular path. This task covered various fundamental aspects of ROS, such as nodes, publishers, subscribers, messages, and topics.
+
 
