@@ -80,6 +80,9 @@ To test the ROS installation and make sure everything is set up correctly, start
 roscore
 ```
 
+![image](https://github.com/user-attachments/assets/c3804b1e-9657-4eb7-b4c3-43870f8c1539)
+
+
 This will start the central server (ROS Master) needed for your ROS nodes to communicate. You should see output like:
 
 ```bash
@@ -99,6 +102,9 @@ rosrun turtlesim turtlesim_node
 ```
 
 This should open the Turtlesim window, assuming that display forwarding is set up correctly.
+
+![image](https://github.com/user-attachments/assets/382f8813-9e2d-4504-a711-8c08b57e2fe8)
+
 
 Here’s the continuation of the **README.md** with the steps you’ve outlined:
 
@@ -175,6 +181,9 @@ catkin_make
 
 This will compile the package and generate the necessary files.
 
+![image](https://github.com/user-attachments/assets/85996bd2-3554-4e69-999c-a9d27420d22f)
+
+
 ### 6. Check if `catkin_make` is available:
 
 If you face issues with `catkin_make`, ensure that it's properly installed. You can check if `catkin_make` is available by running:
@@ -231,6 +240,9 @@ rosrun ros_session move_circle.py
 
 This will make the turtle move in a circular path. If everything is working correctly, you should see the turtle moving in the turtlesim window.
 
+![image](https://github.com/user-attachments/assets/18c0c8c0-33a7-4591-8c04-eeb1980a6537)
+
+
 ### 2. For straight-line movement:
 
 ```bash
@@ -247,8 +259,4 @@ If the turtle does not move as expected, check the terminal output for any error
 - ROS is sourced correctly.
 - The required dependencies are installed.
 
----
 
-This section of the README explains how to set up and run your ROS package with the Turtlesim node. At this point, you should be able to see the turtle moving in either a straight line or a circular trajectory based on the script you run. You can proceed with further modifications or improvements as needed.
-
-Let me know if you need further assistance or have more steps to add!
