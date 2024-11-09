@@ -10,39 +10,39 @@ def move_rectangle():
     rate = rospy.Rate(1)
 
     move_cmd = Twist()
-    linear_speed = 1.5  
+    linear_speed = 2.5
     angular_speed = 1.57
 
     for _ in range(2):
         move_cmd.linear.x = linear_speed
         move_cmd.angular.z = 0.0
         pub.publish(move_cmd)
-        sleep(1.5) 
+        sleep(2)
 
         move_cmd.linear.x = 0.0
-        move_cmd.angular.z = angular_speed
+        move_cmd.angular.z = 1.57
         pub.publish(move_cmd)
-        sleep(0.75) 
+        sleep(1)
 
         move_cmd.linear.x = linear_speed
         move_cmd.angular.z = 0.0
         pub.publish(move_cmd)
-        sleep(1.5)
+        sleep(2)
 
         move_cmd.linear.x = 0.0
-        move_cmd.angular.z = angular_speed
+        move_cmd.angular.z = 1.57
         pub.publish(move_cmd)
-        sleep(1.5)
+        sleep(2)
 
         move_cmd.linear.x = linear_speed + 3
         move_cmd.angular.z = 0.0
         pub.publish(move_cmd)
-        sleep(1.5)
+        sleep(2)
 
     move_cmd.linear.x = 0.0
     move_cmd.angular.z = 0.0
     pub.publish(move_cmd)
-    rospy.loginfo("Finished moving in a smaller rectangle")
+    rospy.loginfo("Finished moving in a rectangle")
 
 if __name__ == '__main__':
     try:
