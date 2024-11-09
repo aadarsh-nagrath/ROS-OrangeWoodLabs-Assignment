@@ -99,3 +99,156 @@ rosrun turtlesim turtlesim_node
 ```
 
 This should open the Turtlesim window, assuming that display forwarding is set up correctly.
+
+Here’s the continuation of the **README.md** with the steps you’ve outlined:
+
+---
+
+## Step 8: Access the Running Docker Container
+
+If you're not already inside the running Docker container where ROS is set up, open a new terminal and access the container by running:
+
+```bash
+sudo docker exec -it <container_name_or_id> bash
+```
+
+Replace `<container_name_or_id>` with the name or ID of your running container. This command will give you a new terminal session inside the running container.
+
+## Step 9: Create and Set Up Your ROS Workspace
+
+Now, inside the Docker container terminal, follow these steps to set up your **catkin workspace**.
+
+### 1. Create the catkin workspace (if not already created):
+
+```bash
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws
+```
+
+This will create the `catkin_ws` workspace with a `src` folder.
+
+### 2. Clone the provided ROS package:
+
+Navigate to the `src` directory inside your `catkin_ws` and clone the provided repository.
+
+```bash
+cd ~/catkin_ws/src
+git clone https://github.com/topguns837/ros_session.git
+```
+
+This will download the repository containing the ROS package.
+
+### 3. Install catkin build dependencies:
+
+Before you can build the workspace, you need to install the necessary dependencies to use `catkin_make`.
+
+Run the following commands to install the ROS build dependencies:
+
+```bash
+sudo apt-get install ros-noetic-catkin
+```
+
+Also, install the **catkin-tools** to manage your build process:
+
+```bash
+sudo apt-get install python3-catkin-tools
+```
+
+This will install the `catkin_make` tool and other necessary utilities to help you build your workspace.
+
+### 4. Source the ROS setup files:
+
+After installing the dependencies, make sure to source the ROS environment setup file before you run the build process:
+
+```bash
+source /opt/ros/noetic/setup.bash
+```
+
+### 5. Build the workspace using `catkin_make`:
+
+Now that everything is set up, navigate back to your workspace and build it using `catkin_make`:
+
+```bash
+cd ~/catkin_ws
+catkin_make
+```
+
+This will compile the package and generate the necessary files.
+
+### 6. Check if `catkin_make` is available:
+
+If you face issues with `catkin_make`, ensure that it's properly installed. You can check if `catkin_make` is available by running:
+
+```bash
+which catkin_make
+```
+
+If it returns the path to `catkin_make` (e.g., `/opt/ros/noetic/bin/catkin_make`), then the command is available. Otherwise, there might be a problem with the installation.
+
+### 7. Source the workspace setup file:
+
+Once the build process is complete, you need to source the workspace's setup file so that ROS can recognize your new packages:
+
+```bash
+source devel/setup.bash
+```
+
+## Step 10: Look for Movement Scripts
+
+Next, let's locate the scripts that control the turtle’s movement.
+
+### 1. List the contents of the `scripts` directory:
+
+Navigate to the `scripts` directory inside the cloned package:
+
+```bash
+cd ~/catkin_ws/src/ros_session/scripts
+ls
+```
+
+You should see scripts that control the turtle’s movement, such as `move_circle.py` and `move_straight.py`.
+
+### 2. Ensure the scripts are executable:
+
+Make sure that the scripts are executable by running the following commands:
+
+```bash
+chmod +x ~/catkin_ws/src/ros_session/scripts/move_circle.py
+chmod +x ~/catkin_ws/src/ros_session/scripts/move_straight.py
+```
+
+This will grant execute permissions to the Python scripts.
+
+## Step 11: Run the ROS Node Manually
+
+Now, you can manually run the ROS nodes to see if they control the turtle's movement.
+
+### 1. For circular movement:
+
+```bash
+rosrun ros_session move_circle.py
+```
+
+This will make the turtle move in a circular path. If everything is working correctly, you should see the turtle moving in the turtlesim window.
+
+### 2. For straight-line movement:
+
+```bash
+rosrun ros_session move_straight.py
+```
+
+This will make the turtle move in a straight line. Again, check the turtlesim window to confirm the movement.
+
+### 3. Check for errors:
+
+If the turtle does not move as expected, check the terminal output for any error messages. If there are issues, make sure that:
+
+- The scripts are properly executed.
+- ROS is sourced correctly.
+- The required dependencies are installed.
+
+---
+
+This section of the README explains how to set up and run your ROS package with the Turtlesim node. At this point, you should be able to see the turtle moving in either a straight line or a circular trajectory based on the script you run. You can proceed with further modifications or improvements as needed.
+
+Let me know if you need further assistance or have more steps to add!
